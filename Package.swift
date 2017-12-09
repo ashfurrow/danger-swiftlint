@@ -3,21 +3,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "danger-swiftlint",
+    name: "DangerSwiftLint",
     products: [
         .library(
-            name: "danger-swiftlint",
-            targets: ["danger-swiftlint"]),
+            name: "DangerSwiftLint",
+            targets: ["DangerSwiftLint"]),
     ],
     dependencies: [
         .package(url: "https://github.com/danger/danger-swift.git", from: "0.3.0")
     ],
     targets: [
         .target(
-            name: "danger-swiftlint",
+            name: "DangerSwiftLint",
             dependencies: []),
         .testTarget(
-            name: "danger-swiftlintTests",
-            dependencies: ["danger-swiftlint"]),
+            name: "DangerSwiftLintTests",
+            dependencies: ["DangerSwiftLint"]),
     ]
 )
