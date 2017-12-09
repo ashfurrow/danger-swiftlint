@@ -1,7 +1,7 @@
 import Danger
 
 public struct SwiftLint {
-    let danger = Danger()
+    static let danger = Danger()
     public static func lint() {
         /*
          TODO:
@@ -9,7 +9,7 @@ public struct SwiftLint {
          - Invoke SwiftLint
          - Post errors+warnings
          */
-
+        print("Hello! \(danger.git.modifiedFiles)")
     }
 }
 
