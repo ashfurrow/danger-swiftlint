@@ -8,6 +8,7 @@ internal class ShellExecutor {
 
         let pipe = Pipe()
         task.standardOutput = pipe
+        print("Executing \(launchPath) \(arguments.joined(separator: " "))")
         task.launch()
 
         let data = pipe.fileHandleForReading.readDataToEndOfFile()

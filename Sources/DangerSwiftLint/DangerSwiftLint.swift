@@ -27,6 +27,7 @@ internal extension SwiftLint {
 
         // So, we need to find out where the swiftlint tool is installed.
         let swiftlintPath = shellExecutor.execute("which", arguments: "swiftlint")
+        print("Found swiftlint executable: \(swiftlintPath)")
 
         files.filter { $0.hasSuffix(".swift") }.forEach { file in
             let outputJSON = shellExecutor.execute(swiftlintPath, arguments: "lint", "--path \(file)", "--reporter json")
