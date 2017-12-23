@@ -23,4 +23,9 @@ class ViolnationTests: XCTestCase {
         XCTAssertEqual(subject.severity, .warning)
         XCTAssertEqual(subject.type, "Opening Brace Spacing")
     }
+
+
+    static var allTests = [
+        ("testDecoding", testDecoding)
+    ]
 }

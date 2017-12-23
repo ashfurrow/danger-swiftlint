@@ -65,6 +65,10 @@ class DangerSwiftLintTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExecutesTheShell),
+        ("testExecutesTheShell", testExecutesTheShell),
+        ("testFiltersOnSwiftFiles", testFiltersOnSwiftFiles),
+        ("testPrintsNoMarkdownIfNoViolations", testPrintsNoMarkdownIfNoViolations),
+        ("testViolations", testViolations),
+        ("testMarkdownReporting", testMarkdownReporting)
     ]
 }
