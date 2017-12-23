@@ -24,14 +24,8 @@ internal extension SwiftLint {
 
         let files = danger.git.createdFiles + danger.git.modifiedFiles
         let decoder = JSONDecoder()
-        let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file in
-            do {
-                return try shellExecutor.execute("swiftlint", arguments: "lint", "--path \(file)", "--reporter json")
-            } catch let error {
-                fail("Error executing SwiftLint (\(file)): \(error)")
-                return nil
-            }
-        }.flatMap { outputJSON -> [Violation] in
+        let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
+            let outputJSON = shellExecutor.execute("swiftlint", arguments: "lint", "--quiet", "--path \(file)", "--reporter json")
             do {
                 return try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
             } catch let error {
