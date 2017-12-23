@@ -6,7 +6,17 @@
 
 ## Usage
 
-[Install and run](https://github.com/danger/danger-swift#ci-configuration) DangerSwift as normal, and use the following `Dangerfile.swift`.
+[Install and run](https://github.com/danger/danger-swift#ci-configuration) DangerSwift as normal and install SwiftLint in your CI's config file. Something like:
+
+```yaml
+dependencies:
+  override:
+  - npm install -g danger # This and the next line are just for Danger-Swift.
+  - brew install danger/tap/danger-swift
+  - brew install swiftlint # This is for the Danger Swiftlint plugin.
+```
+
+Then use the following `Dangerfile.swift`.
 
 ```swift
 // Dangerfile.swift

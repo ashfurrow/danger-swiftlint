@@ -21,35 +21,36 @@ internal extension SwiftLint {
         markdown: (String) -> Void = markdown,
         fail: (String) -> Void = fail) -> [Violation] {
         // Gathers modified+created files, invokes SwiftLint on each, and posts collected errors+warnings to Danger.
-        var allViolations = Array<Violation>()
-        let decoder = JSONDecoder()
+
         let files = danger.git.createdFiles + danger.git.modifiedFiles
-
-        // So, we need to find out where the swiftlint tool is installed.
-        let swiftlintPath = shellExecutor.execute("which", arguments: "swiftlint")
-        print("Found swiftlint executable: \(swiftlintPath)")
-
-        files.filter { $0.hasSuffix(".swift") }.forEach { file in
-            let outputJSON = shellExecutor.execute(swiftlintPath, arguments: "lint", "--path \(file)", "--reporter json")
+        let decoder = JSONDecoder()
+        let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file in
             do {
-                let violations = try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
-                allViolations += violations
+                return try shellExecutor.execute("swiftlint", arguments: "lint", "--path \(file)", "--reporter json")
             } catch let error {
-                fail("Error deserializing SwiftLint JSON response (\(file)): \(error)")
+                fail("Error executing SwiftLint (\(file)): \(error)")
+                return nil
+            }
+        }.flatMap { outputJSON -> [Violation] in
+            do {
+                return try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
+            } catch let error {
+                fail("Error deserializing SwiftLint JSON response (\(outputJSON)): \(error)")
+                return []
             }
         }
 
-        if !allViolations.isEmpty {
+        if !violations.isEmpty {
             var markdownMessage = """
             ### SwiftLint found issues
 
             | Severity | File | Reason |
             | -------- | ---- | ------ |\n
             """
-            markdownMessage += allViolations.map { $0.toMarkdown() }.joined(separator: "\n")
+            markdownMessage += violations.map { $0.toMarkdown() }.joined(separator: "\n")
             markdown(markdownMessage)
         }
 
-        return allViolations
+        return violations
     }
 }
