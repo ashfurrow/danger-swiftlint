@@ -1,0 +1,603 @@
+{
+  "danger": {
+    "git": {
+      "modified_files": [
+        "SomeFile.swift",
+        "SomeOtherFile.swift",
+        "circle.yml"
+      ],
+      "created_files": [],
+      "deleted_files": [],
+      "commits": [
+        {
+          "sha": "2568af9776e537f0fde421786d03a06dfdef3586",
+          "parents": [
+            "02107d91cf9ffc99a5941965cc890bc970bd8ce3"
+          ],
+          "author": {
+            "name": "Ash Furrow",
+            "email": "ash@ashfurrow.com",
+            "date": "2017-12-09T17:14:49Z"
+          },
+          "committer": {
+            "name": "Ash Furrow",
+            "email": "ash@ashfurrow.com",
+            "date": "2017-12-09T17:18:26Z"
+          },
+          "message": "First draft of SwiftLint DangerSwift plugin.",
+          "tree": {
+            "sha": "35083e4e85c919783afc8c399b10b8b41147a3a5",
+            "url": "https://api.github.com/repos/Moya/Harvey/git/trees/35083e4e85c919783afc8c399b10b8b41147a3a5"
+          },
+          "url": "https://api.github.com/repos/Moya/Harvey/commits/2568af9776e537f0fde421786d03a06dfdef3586"
+        },
+        {
+          "sha": "bc9a2a7c2b878c8b377033335573cda01981eb6e",
+          "parents": [
+            "2568af9776e537f0fde421786d03a06dfdef3586"
+          ],
+          "author": {
+            "name": "Ash Furrow",
+            "email": "ash@ashfurrow.com",
+            "date": "2017-12-09T17:32:54Z"
+          },
+          "committer": {
+            "name": "Ash Furrow",
+            "email": "ash@ashfurrow.com",
+            "date": "2017-12-09T17:32:54Z"
+          },
+          "message": "Typo.",
+          "tree": {
+            "sha": "1cc69ec26ed9bdedc9ec97fca66e43e22f9129c5",
+            "url": "https://api.github.com/repos/Moya/Harvey/git/trees/1cc69ec26ed9bdedc9ec97fca66e43e22f9129c5"
+          },
+          "url": "https://api.github.com/repos/Moya/Harvey/commits/bc9a2a7c2b878c8b377033335573cda01981eb6e"
+        }
+      ]
+    },
+    "github": {
+      "issue": {
+        "url": "https://api.github.com/repos/Moya/Harvey/issues/15",
+        "repository_url": "https://api.github.com/repos/Moya/Harvey",
+        "labels_url": "https://api.github.com/repos/Moya/Harvey/issues/15/labels{/name}",
+        "comments_url": "https://api.github.com/repos/Moya/Harvey/issues/15/comments",
+        "events_url": "https://api.github.com/repos/Moya/Harvey/issues/15/events",
+        "html_url": "https://github.com/Moya/Harvey/pull/15",
+        "id": 280736285,
+        "number": 15,
+        "title": "WIP: First draft of SwiftLint DangerSwift plugin.",
+        "user": {
+          "login": "ashfurrow",
+          "id": 498212,
+          "avatar_url": "https://avatars3.githubusercontent.com/u/498212?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ashfurrow",
+          "html_url": "https://github.com/ashfurrow",
+          "followers_url": "https://api.github.com/users/ashfurrow/followers",
+          "following_url": "https://api.github.com/users/ashfurrow/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ashfurrow/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ashfurrow/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ashfurrow/subscriptions",
+          "organizations_url": "https://api.github.com/users/ashfurrow/orgs",
+          "repos_url": "https://api.github.com/users/ashfurrow/repos",
+          "events_url": "https://api.github.com/users/ashfurrow/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ashfurrow/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "labels": [],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "assignees": [],
+        "milestone": null,
+        "comments": 2,
+        "created_at": "2017-12-09T17:15:29Z",
+        "updated_at": "2017-12-09T17:34:42Z",
+        "closed_at": null,
+        "author_association": "OWNER",
+        "pull_request": {
+          "url": "https://api.github.com/repos/Moya/Harvey/pulls/15",
+          "html_url": "https://github.com/Moya/Harvey/pull/15",
+          "diff_url": "https://github.com/Moya/Harvey/pull/15.diff",
+          "patch_url": "https://github.com/Moya/Harvey/pull/15.patch"
+        },
+        "body": "Based on this work: https://github.com/ashfurrow/danger-swiftlint",
+        "closed_by": null
+      },
+      "pr": {
+        "url": "https://api.github.com/repos/Moya/Harvey/pulls/15",
+        "id": 157395438,
+        "html_url": "https://github.com/Moya/Harvey/pull/15",
+        "diff_url": "https://github.com/Moya/Harvey/pull/15.diff",
+        "patch_url": "https://github.com/Moya/Harvey/pull/15.patch",
+        "issue_url": "https://api.github.com/repos/Moya/Harvey/issues/15",
+        "number": 15,
+        "state": "open",
+        "locked": false,
+        "title": "WIP: First draft of SwiftLint DangerSwift plugin.",
+        "user": {
+          "login": "ashfurrow",
+          "id": 498212,
+          "avatar_url": "https://avatars3.githubusercontent.com/u/498212?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ashfurrow",
+          "html_url": "https://github.com/ashfurrow",
+          "followers_url": "https://api.github.com/users/ashfurrow/followers",
+          "following_url": "https://api.github.com/users/ashfurrow/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ashfurrow/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ashfurrow/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ashfurrow/subscriptions",
+          "organizations_url": "https://api.github.com/users/ashfurrow/orgs",
+          "repos_url": "https://api.github.com/users/ashfurrow/repos",
+          "events_url": "https://api.github.com/users/ashfurrow/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ashfurrow/received_events",
+          "type": "User",
+          "site_admin": false
+        },
+        "body": "Based on this work: https://github.com/ashfurrow/danger-swiftlint",
+        "created_at": "2017-12-09T17:15:29Z",
+        "updated_at": "2017-12-09T17:34:42Z",
+        "closed_at": null,
+        "merged_at": null,
+        "merge_commit_sha": "067773a36e4a7fa8573614a09399470cd9022165",
+        "assignee": null,
+        "assignees": [],
+        "requested_reviewers": [],
+        "milestone": null,
+        "commits_url": "https://api.github.com/repos/Moya/Harvey/pulls/15/commits",
+        "review_comments_url": "https://api.github.com/repos/Moya/Harvey/pulls/15/comments",
+        "review_comment_url": "https://api.github.com/repos/Moya/Harvey/pulls/comments{/number}",
+        "comments_url": "https://api.github.com/repos/Moya/Harvey/issues/15/comments",
+        "statuses_url": "https://api.github.com/repos/Moya/Harvey/statuses/bc9a2a7c2b878c8b377033335573cda01981eb6e",
+        "head": {
+          "label": "Moya:danger-swift",
+          "ref": "danger-swift",
+          "sha": "bc9a2a7c2b878c8b377033335573cda01981eb6e",
+          "user": {
+            "login": "Moya",
+            "id": 13662162,
+            "avatar_url": "https://avatars3.githubusercontent.com/u/13662162?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/Moya",
+            "html_url": "https://github.com/Moya",
+            "followers_url": "https://api.github.com/users/Moya/followers",
+            "following_url": "https://api.github.com/users/Moya/following{/other_user}",
+            "gists_url": "https://api.github.com/users/Moya/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/Moya/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/Moya/subscriptions",
+            "organizations_url": "https://api.github.com/users/Moya/orgs",
+            "repos_url": "https://api.github.com/users/Moya/repos",
+            "events_url": "https://api.github.com/users/Moya/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/Moya/received_events",
+            "type": "Organization",
+            "site_admin": false
+          },
+          "repo": {
+            "id": 104667327,
+            "name": "Harvey",
+            "full_name": "Moya/Harvey",
+            "owner": {
+              "login": "Moya",
+              "id": 13662162,
+              "avatar_url": "https://avatars3.githubusercontent.com/u/13662162?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/Moya",
+              "html_url": "https://github.com/Moya",
+              "followers_url": "https://api.github.com/users/Moya/followers",
+              "following_url": "https://api.github.com/users/Moya/following{/other_user}",
+              "gists_url": "https://api.github.com/users/Moya/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/Moya/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/Moya/subscriptions",
+              "organizations_url": "https://api.github.com/users/Moya/orgs",
+              "repos_url": "https://api.github.com/users/Moya/repos",
+              "events_url": "https://api.github.com/users/Moya/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/Moya/received_events",
+              "type": "Organization",
+              "site_admin": false
+            },
+            "private": false,
+            "html_url": "https://github.com/Moya/Harvey",
+            "description": "Network response stubbing library written in Swift.",
+            "fork": false,
+            "url": "https://api.github.com/repos/Moya/Harvey",
+            "forks_url": "https://api.github.com/repos/Moya/Harvey/forks",
+            "keys_url": "https://api.github.com/repos/Moya/Harvey/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/Moya/Harvey/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/Moya/Harvey/teams",
+            "hooks_url": "https://api.github.com/repos/Moya/Harvey/hooks",
+            "issue_events_url": "https://api.github.com/repos/Moya/Harvey/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/Moya/Harvey/events",
+            "assignees_url": "https://api.github.com/repos/Moya/Harvey/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/Moya/Harvey/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/Moya/Harvey/tags",
+            "blobs_url": "https://api.github.com/repos/Moya/Harvey/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/Moya/Harvey/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/Moya/Harvey/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/Moya/Harvey/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/Moya/Harvey/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/Moya/Harvey/languages",
+            "stargazers_url": "https://api.github.com/repos/Moya/Harvey/stargazers",
+            "contributors_url": "https://api.github.com/repos/Moya/Harvey/contributors",
+            "subscribers_url": "https://api.github.com/repos/Moya/Harvey/subscribers",
+            "subscription_url": "https://api.github.com/repos/Moya/Harvey/subscription",
+            "commits_url": "https://api.github.com/repos/Moya/Harvey/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/Moya/Harvey/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/Moya/Harvey/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/Moya/Harvey/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/Moya/Harvey/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/Moya/Harvey/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/Moya/Harvey/merges",
+            "archive_url": "https://api.github.com/repos/Moya/Harvey/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/Moya/Harvey/downloads",
+            "issues_url": "https://api.github.com/repos/Moya/Harvey/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/Moya/Harvey/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/Moya/Harvey/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/Moya/Harvey/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/Moya/Harvey/labels{/name}",
+            "releases_url": "https://api.github.com/repos/Moya/Harvey/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/Moya/Harvey/deployments",
+            "created_at": "2017-09-24T18:38:39Z",
+            "updated_at": "2017-12-05T03:46:51Z",
+            "pushed_at": "2017-12-09T17:32:58Z",
+            "git_url": "git://github.com/Moya/Harvey.git",
+            "ssh_url": "git@github.com:Moya/Harvey.git",
+            "clone_url": "https://github.com/Moya/Harvey.git",
+            "svn_url": "https://github.com/Moya/Harvey",
+            "homepage": "",
+            "size": 33,
+            "stargazers_count": 58,
+            "watchers_count": 58,
+            "language": "Swift",
+            "has_issues": true,
+            "has_projects": true,
+            "has_downloads": true,
+            "has_wiki": true,
+            "has_pages": false,
+            "forks_count": 4,
+            "mirror_url": null,
+            "archived": false,
+            "open_issues_count": 3,
+            "license": {
+              "key": "mit",
+              "name": "MIT License",
+              "spdx_id": "MIT",
+              "url": "https://api.github.com/licenses/mit"
+            },
+            "forks": 4,
+            "open_issues": 3,
+            "watchers": 58,
+            "default_branch": "master"
+          }
+        },
+        "base": {
+          "label": "Moya:master",
+          "ref": "master",
+          "sha": "49bc7d15000c884133e5592db30c7a1399a4936e",
+          "user": {
+            "login": "Moya",
+            "id": 13662162,
+            "avatar_url": "https://avatars3.githubusercontent.com/u/13662162?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/Moya",
+            "html_url": "https://github.com/Moya",
+            "followers_url": "https://api.github.com/users/Moya/followers",
+            "following_url": "https://api.github.com/users/Moya/following{/other_user}",
+            "gists_url": "https://api.github.com/users/Moya/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/Moya/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/Moya/subscriptions",
+            "organizations_url": "https://api.github.com/users/Moya/orgs",
+            "repos_url": "https://api.github.com/users/Moya/repos",
+            "events_url": "https://api.github.com/users/Moya/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/Moya/received_events",
+            "type": "Organization",
+            "site_admin": false
+          },
+          "repo": {
+            "id": 104667327,
+            "name": "Harvey",
+            "full_name": "Moya/Harvey",
+            "owner": {
+              "login": "Moya",
+              "id": 13662162,
+              "avatar_url": "https://avatars3.githubusercontent.com/u/13662162?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/Moya",
+              "html_url": "https://github.com/Moya",
+              "followers_url": "https://api.github.com/users/Moya/followers",
+              "following_url": "https://api.github.com/users/Moya/following{/other_user}",
+              "gists_url": "https://api.github.com/users/Moya/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/Moya/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/Moya/subscriptions",
+              "organizations_url": "https://api.github.com/users/Moya/orgs",
+              "repos_url": "https://api.github.com/users/Moya/repos",
+              "events_url": "https://api.github.com/users/Moya/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/Moya/received_events",
+              "type": "Organization",
+              "site_admin": false
+            },
+            "private": false,
+            "html_url": "https://github.com/Moya/Harvey",
+            "description": "Network response stubbing library written in Swift.",
+            "fork": false,
+            "url": "https://api.github.com/repos/Moya/Harvey",
+            "forks_url": "https://api.github.com/repos/Moya/Harvey/forks",
+            "keys_url": "https://api.github.com/repos/Moya/Harvey/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/Moya/Harvey/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/Moya/Harvey/teams",
+            "hooks_url": "https://api.github.com/repos/Moya/Harvey/hooks",
+            "issue_events_url": "https://api.github.com/repos/Moya/Harvey/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/Moya/Harvey/events",
+            "assignees_url": "https://api.github.com/repos/Moya/Harvey/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/Moya/Harvey/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/Moya/Harvey/tags",
+            "blobs_url": "https://api.github.com/repos/Moya/Harvey/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/Moya/Harvey/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/Moya/Harvey/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/Moya/Harvey/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/Moya/Harvey/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/Moya/Harvey/languages",
+            "stargazers_url": "https://api.github.com/repos/Moya/Harvey/stargazers",
+            "contributors_url": "https://api.github.com/repos/Moya/Harvey/contributors",
+            "subscribers_url": "https://api.github.com/repos/Moya/Harvey/subscribers",
+            "subscription_url": "https://api.github.com/repos/Moya/Harvey/subscription",
+            "commits_url": "https://api.github.com/repos/Moya/Harvey/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/Moya/Harvey/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/Moya/Harvey/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/Moya/Harvey/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/Moya/Harvey/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/Moya/Harvey/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/Moya/Harvey/merges",
+            "archive_url": "https://api.github.com/repos/Moya/Harvey/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/Moya/Harvey/downloads",
+            "issues_url": "https://api.github.com/repos/Moya/Harvey/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/Moya/Harvey/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/Moya/Harvey/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/Moya/Harvey/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/Moya/Harvey/labels{/name}",
+            "releases_url": "https://api.github.com/repos/Moya/Harvey/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/Moya/Harvey/deployments",
+            "created_at": "2017-09-24T18:38:39Z",
+            "updated_at": "2017-12-05T03:46:51Z",
+            "pushed_at": "2017-12-09T17:32:58Z",
+            "git_url": "git://github.com/Moya/Harvey.git",
+            "ssh_url": "git@github.com:Moya/Harvey.git",
+            "clone_url": "https://github.com/Moya/Harvey.git",
+            "svn_url": "https://github.com/Moya/Harvey",
+            "homepage": "",
+            "size": 33,
+            "stargazers_count": 58,
+            "watchers_count": 58,
+            "language": "Swift",
+            "has_issues": true,
+            "has_projects": true,
+            "has_downloads": true,
+            "has_wiki": true,
+            "has_pages": false,
+            "forks_count": 4,
+            "mirror_url": null,
+            "archived": false,
+            "open_issues_count": 3,
+            "license": {
+              "key": "mit",
+              "name": "MIT License",
+              "spdx_id": "MIT",
+              "url": "https://api.github.com/licenses/mit"
+            },
+            "forks": 4,
+            "open_issues": 3,
+            "watchers": 58,
+            "default_branch": "master"
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.github.com/repos/Moya/Harvey/pulls/15"
+          },
+          "html": {
+            "href": "https://github.com/Moya/Harvey/pull/15"
+          },
+          "issue": {
+            "href": "https://api.github.com/repos/Moya/Harvey/issues/15"
+          },
+          "comments": {
+            "href": "https://api.github.com/repos/Moya/Harvey/issues/15/comments"
+          },
+          "review_comments": {
+            "href": "https://api.github.com/repos/Moya/Harvey/pulls/15/comments"
+          },
+          "review_comment": {
+            "href": "https://api.github.com/repos/Moya/Harvey/pulls/comments{/number}"
+          },
+          "commits": {
+            "href": "https://api.github.com/repos/Moya/Harvey/pulls/15/commits"
+          },
+          "statuses": {
+            "href": "https://api.github.com/repos/Moya/Harvey/statuses/bc9a2a7c2b878c8b377033335573cda01981eb6e"
+          }
+        },
+        "author_association": "OWNER",
+        "merged": false,
+        "mergeable": true,
+        "rebaseable": true,
+        "mergeable_state": "unstable",
+        "merged_by": null,
+        "comments": 2,
+        "review_comments": 0,
+        "maintainer_can_modify": false,
+        "commits": 2,
+        "additions": 18,
+        "deletions": 16,
+        "changed_files": 2
+      },
+      "commits": [
+        {
+          "sha": "2568af9776e537f0fde421786d03a06dfdef3586",
+          "commit": {
+            "author": {
+              "name": "Ash Furrow",
+              "email": "ash@ashfurrow.com",
+              "date": "2017-12-09T17:14:49Z"
+            },
+            "committer": {
+              "name": "Ash Furrow",
+              "email": "ash@ashfurrow.com",
+              "date": "2017-12-09T17:18:26Z"
+            },
+            "message": "First draft of SwiftLint DangerSwift plugin.",
+            "tree": {
+              "sha": "35083e4e85c919783afc8c399b10b8b41147a3a5",
+              "url": "https://api.github.com/repos/Moya/Harvey/git/trees/35083e4e85c919783afc8c399b10b8b41147a3a5"
+            },
+            "url": "https://api.github.com/repos/Moya/Harvey/git/commits/2568af9776e537f0fde421786d03a06dfdef3586",
+            "comment_count": 0,
+            "verification": {
+              "verified": true,
+              "reason": "valid",
+              "signature": "-----BEGIN PGP SIGNATURE-----\n\niQFGBAABCgAwFiEEREhi2UsA5UmdVzQVAZk6xwQ0X+0FAlosGuISHGFzaEBhc2hm\ndXJyb3cuY29tAAoJEAGZOscENF/tCv4H/2Gbs5tFImpJcQ8icJvh/9/rzouY2Pqb\nh5behuErjoAPuwUblnNJO2+rFDA4kSJbnx8vJEfc0CF5k68zWzEB8ZLsxGgEBZrr\nRjV0pmPrSeCFnCgHSMHPerd7jnEvSZ2HIj+87fZotWa5HSTrN3mo7EN+LxamKlGy\nglRnGMfvb6PbjgoS4RZvrwXQVxuZ5u8kSfTZ5nLQ1z7UZnuN59t/ECQPNVnxSWM8\nwc59WLfutd6CcUP4mc4tEQYxrClibSlwcjeHo+PFyRZCXcyz51l+4r0qqytoQ330\nqlcw7HKtsPTPdPnsWXoRX5ONWCaFZD5FgLWvWeEH2i5ZLcEoWwvK4w8=\n=ZKQS\n-----END PGP SIGNATURE-----",
+              "payload": "tree 35083e4e85c919783afc8c399b10b8b41147a3a5\nparent 02107d91cf9ffc99a5941965cc890bc970bd8ce3\nauthor Ash Furrow <ash@ashfurrow.com> 1512839689 -0500\ncommitter Ash Furrow <ash@ashfurrow.com> 1512839906 -0500\n\nFirst draft of SwiftLint DangerSwift plugin.\n"
+            }
+          },
+          "url": "https://api.github.com/repos/Moya/Harvey/commits/2568af9776e537f0fde421786d03a06dfdef3586",
+          "html_url": "https://github.com/Moya/Harvey/commit/2568af9776e537f0fde421786d03a06dfdef3586",
+          "comments_url": "https://api.github.com/repos/Moya/Harvey/commits/2568af9776e537f0fde421786d03a06dfdef3586/comments",
+          "author": {
+            "login": "ashfurrow",
+            "id": 498212,
+            "avatar_url": "https://avatars3.githubusercontent.com/u/498212?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ashfurrow",
+            "html_url": "https://github.com/ashfurrow",
+            "followers_url": "https://api.github.com/users/ashfurrow/followers",
+            "following_url": "https://api.github.com/users/ashfurrow/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ashfurrow/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ashfurrow/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ashfurrow/subscriptions",
+            "organizations_url": "https://api.github.com/users/ashfurrow/orgs",
+            "repos_url": "https://api.github.com/users/ashfurrow/repos",
+            "events_url": "https://api.github.com/users/ashfurrow/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ashfurrow/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "committer": {
+            "login": "ashfurrow",
+            "id": 498212,
+            "avatar_url": "https://avatars3.githubusercontent.com/u/498212?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ashfurrow",
+            "html_url": "https://github.com/ashfurrow",
+            "followers_url": "https://api.github.com/users/ashfurrow/followers",
+            "following_url": "https://api.github.com/users/ashfurrow/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ashfurrow/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ashfurrow/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ashfurrow/subscriptions",
+            "organizations_url": "https://api.github.com/users/ashfurrow/orgs",
+            "repos_url": "https://api.github.com/users/ashfurrow/repos",
+            "events_url": "https://api.github.com/users/ashfurrow/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ashfurrow/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "parents": [
+            {
+              "sha": "02107d91cf9ffc99a5941965cc890bc970bd8ce3",
+              "url": "https://api.github.com/repos/Moya/Harvey/commits/02107d91cf9ffc99a5941965cc890bc970bd8ce3",
+              "html_url": "https://github.com/Moya/Harvey/commit/02107d91cf9ffc99a5941965cc890bc970bd8ce3"
+            }
+          ]
+        },
+        {
+          "sha": "bc9a2a7c2b878c8b377033335573cda01981eb6e",
+          "commit": {
+            "author": {
+              "name": "Ash Furrow",
+              "email": "ash@ashfurrow.com",
+              "date": "2017-12-09T17:32:54Z"
+            },
+            "committer": {
+              "name": "Ash Furrow",
+              "email": "ash@ashfurrow.com",
+              "date": "2017-12-09T17:32:54Z"
+            },
+            "message": "Typo.",
+            "tree": {
+              "sha": "1cc69ec26ed9bdedc9ec97fca66e43e22f9129c5",
+              "url": "https://api.github.com/repos/Moya/Harvey/git/trees/1cc69ec26ed9bdedc9ec97fca66e43e22f9129c5"
+            },
+            "url": "https://api.github.com/repos/Moya/Harvey/git/commits/bc9a2a7c2b878c8b377033335573cda01981eb6e",
+            "comment_count": 0,
+            "verification": {
+              "verified": true,
+              "reason": "valid",
+              "signature": "-----BEGIN PGP SIGNATURE-----\n\niQFGBAABCgAwFiEEREhi2UsA5UmdVzQVAZk6xwQ0X+0FAlosHkYSHGFzaEBhc2hm\ndXJyb3cuY29tAAoJEAGZOscENF/tyIgIAINBSXAYb83hgyyoGSX7oFEZjAKoF7l7\n9W7cRrYKu2+SRuun84pDqU9BIPotFphotWVVCKMk3rlRlyO1QAy70EfIMzzn3L7n\n7sV//7AceGqm19PJ1lpdeNIigJhzi/Bb5/TDjUq/TAcpMZWF8mVuYY2glbWyaZEW\n27n3l0k04OssGvI3k2yZNL+hLKssuJbJEEg/f8Fxqr7f0VziLQ1cUxAcsk4zhxIQ\nPmiQnzGFLQmfXj3sMliKhhu3hOc2xn4d7mAfQwgexhgDNuWbXkkLMZnA10aDaNlC\nXxakGyqmuoOfkcgXe3LzxqRLZV8t+g0XFnohb0rHIn7Ra6gP0YXz0wk=\n=5W8t\n-----END PGP SIGNATURE-----",
+              "payload": "tree 1cc69ec26ed9bdedc9ec97fca66e43e22f9129c5\nparent 2568af9776e537f0fde421786d03a06dfdef3586\nauthor Ash Furrow <ash@ashfurrow.com> 1512840774 -0500\ncommitter Ash Furrow <ash@ashfurrow.com> 1512840774 -0500\n\nTypo.\n"
+            }
+          },
+          "url": "https://api.github.com/repos/Moya/Harvey/commits/bc9a2a7c2b878c8b377033335573cda01981eb6e",
+          "html_url": "https://github.com/Moya/Harvey/commit/bc9a2a7c2b878c8b377033335573cda01981eb6e",
+          "comments_url": "https://api.github.com/repos/Moya/Harvey/commits/bc9a2a7c2b878c8b377033335573cda01981eb6e/comments",
+          "author": {
+            "login": "ashfurrow",
+            "id": 498212,
+            "avatar_url": "https://avatars3.githubusercontent.com/u/498212?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ashfurrow",
+            "html_url": "https://github.com/ashfurrow",
+            "followers_url": "https://api.github.com/users/ashfurrow/followers",
+            "following_url": "https://api.github.com/users/ashfurrow/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ashfurrow/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ashfurrow/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ashfurrow/subscriptions",
+            "organizations_url": "https://api.github.com/users/ashfurrow/orgs",
+            "repos_url": "https://api.github.com/users/ashfurrow/repos",
+            "events_url": "https://api.github.com/users/ashfurrow/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ashfurrow/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "committer": {
+            "login": "ashfurrow",
+            "id": 498212,
+            "avatar_url": "https://avatars3.githubusercontent.com/u/498212?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ashfurrow",
+            "html_url": "https://github.com/ashfurrow",
+            "followers_url": "https://api.github.com/users/ashfurrow/followers",
+            "following_url": "https://api.github.com/users/ashfurrow/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ashfurrow/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ashfurrow/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ashfurrow/subscriptions",
+            "organizations_url": "https://api.github.com/users/ashfurrow/orgs",
+            "repos_url": "https://api.github.com/users/ashfurrow/repos",
+            "events_url": "https://api.github.com/users/ashfurrow/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ashfurrow/received_events",
+            "type": "User",
+            "site_admin": false
+          },
+          "parents": [
+            {
+              "sha": "2568af9776e537f0fde421786d03a06dfdef3586",
+              "url": "https://api.github.com/repos/Moya/Harvey/commits/2568af9776e537f0fde421786d03a06dfdef3586",
+              "html_url": "https://github.com/Moya/Harvey/commit/2568af9776e537f0fde421786d03a06dfdef3586"
+            }
+          ]
+        }
+      ],
+      "reviews": [],
+      "requested_reviewers": [],
+      "thisPR": {
+        "number": 15,
+        "repo": "Harvey",
+        "owner": "Moya"
+      }
+    },
+    "settings": {
+      "github": {
+        "accessToken": "eaae2d8b563c4278ec628584408d2a51ccbe86bb",
+        "additionalHeaders": {}
+      },
+      "cliArgs": {}
+    }
+  }
+}

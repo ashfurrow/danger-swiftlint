@@ -18,6 +18,8 @@ let package = Package(
             dependencies: ["Danger"]),
         .testTarget(
             name: "DangerSwiftLintTests",
-            dependencies: ["DangerSwiftLint"]),
+            dependencies: [
+              "DangerSwiftLint"
+            ]),
     ]
 )

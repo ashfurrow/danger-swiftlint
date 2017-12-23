@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/JohnSundell/Marathon.git",
         "state": {
           "branch": null,
-          "revision": "5bd186ec7a78f3c978ce72041aa9bea006868454",
-          "version": "2.0.1"
+          "revision": "10d4ae98c9e97ec76d01453781763b2be1cfcec1",
+          "version": "2.0.2"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/danger/danger-swift.git",
         "state": {
           "branch": null,
-          "revision": "b0252d87ece1e8503d87f698b0e01e8bcfceabf8",
-          "version": "0.3.0"
+          "revision": "199d0f48f3fbe6ae3d10c0131f25ff7202c6c809",
+          "version": "0.3.1"
         }
       }
     ]
