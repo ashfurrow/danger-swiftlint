@@ -9,6 +9,7 @@ class DangerSwiftLintTests: XCTestCase {
 
     override func setUp() {
         executor = FakeShellExecutor()
+        // This is for me, testing. Uncomment if you're running tests locally.
         FileManager.default.changeCurrentDirectoryPath("/Users/ash/bin/danger-swiftlint")
         let dslJSONContents = FileManager.default.contents(atPath: "./Tests/Fixtures/harness.json")!
         danger = try! JSONDecoder().decode(DSL.self, from: dslJSONContents).danger
@@ -17,12 +18,12 @@ class DangerSwiftLintTests: XCTestCase {
 
     func testExecutesTheShell() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
-        XCTAssertNotEqual(executor.invocations.count, 0)
+        XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
     }
 
     func testFiltersOnSwiftFiles() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
-        let filesExtensions = Set(executor.invocations.flatMap { $0.arguments[1].split(separator: ".").last })
+        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[1].split(separator: ".").last })
         XCTAssertEqual(filesExtensions, ["swift"])
     }
 

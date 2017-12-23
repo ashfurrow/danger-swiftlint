@@ -24,8 +24,12 @@ internal extension SwiftLint {
         var allViolations = Array<Violation>()
         let decoder = JSONDecoder()
         let files = danger.git.createdFiles + danger.git.modifiedFiles
+
+        // So, we need to find out where the swiftlint tool is installed.
+        let swiftlintPath = shellExecutor.execute("which", arguments: "swiftlint")
+
         files.filter { $0.hasSuffix(".swift") }.forEach { file in
-            let outputJSON = shellExecutor.execute("swiftlint", arguments: "lint", "--path \(file)", "--reporter json")
+            let outputJSON = shellExecutor.execute(swiftlintPath, arguments: "lint", "--path \(file)", "--reporter json")
             do {
                 let violations = try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
                 allViolations += violations
