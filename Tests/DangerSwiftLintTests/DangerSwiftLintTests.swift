@@ -61,6 +61,10 @@ class DangerSwiftLintTests: XCTestCase {
         """
     }
 
+    func testThisDoesNotCrash() {
+        print(ShellExecutor().execute("swiftlint"))
+    }
+
     func writeMarkdown(_ m: String) {
         markdownMessage = m
     }

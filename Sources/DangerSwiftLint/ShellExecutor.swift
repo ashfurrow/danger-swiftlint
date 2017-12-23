@@ -9,6 +9,7 @@ internal class ShellExecutor {
         let task = Process()
         task.launchPath = env["SHELL"]
         task.arguments = ["-l", "-c", script]
+        task.currentDirectoryPath = FileManager.default.currentDirectoryPath
 
         let pipe = Pipe()
         task.standardOutput = pipe
