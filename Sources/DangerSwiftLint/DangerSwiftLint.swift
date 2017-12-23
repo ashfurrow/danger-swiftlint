@@ -9,6 +9,8 @@ public struct SwiftLint {
     /// Call this function anywhere from within your Dangerfile.swift.
     @discardableResult
     public static func lint() -> [Violation] {
+        // First, for debugging purposes, print the working directory.
+        print("Working directory: \(shellExecutor.execute("pwd"))")
         return self.lint(danger: danger, shellExecutor: shellExecutor)
     }
 }
