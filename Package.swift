@@ -10,17 +10,14 @@ let package = Package(
             targets: ["DangerSwiftLint"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/danger/danger-swift.git", from: "0.3.0"),
-        .package(url: "https://github.com/JohnSundell/ShellOut.git", from: "2.0.0")
+        .package(url: "https://github.com/danger/danger-swift.git", from: "0.3.0")
     ],
     targets: [
         .target(
             name: "DangerSwiftLint",
-            dependencies: ["Danger", "ShellOut"]),
+            dependencies: ["Danger"]),
         .testTarget(
             name: "DangerSwiftLintTests",
-            dependencies: [
-              "DangerSwiftLint"
-            ]),
+            dependencies: ["DangerSwiftLint"]),
     ]
 )
