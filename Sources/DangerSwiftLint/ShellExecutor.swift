@@ -1,20 +1,8 @@
 import Foundation
-import ShellOut
 
 internal class ShellExecutor {
     func execute(_ launchPath: String, arguments: String...) -> String {
-        /*
-         do {
-         print(try shellOut(to: "which", arguments: ["swift"]))
-         } catch let error {
-         print(error)
-         }
-
- */
         var env = ProcessInfo.processInfo.environment
-//        env["PATH"] = env["PATH"]! + ":/usr/local/bin"
-        print("PATH: ", env["PATH"])
-
         let task = Process()
         task.launchPath = env["SHELL"]
         task.arguments = ["-l", "-c", launchPath] + arguments

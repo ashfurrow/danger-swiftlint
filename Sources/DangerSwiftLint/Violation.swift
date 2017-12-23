@@ -7,7 +7,7 @@ public struct Violation: Codable {
     let ruleID: String
     let reason: String
     let line: Int
-    let character: Int
+    let character: Int?
     let file: String
     let severity: Severity
     let type: String
@@ -22,7 +22,7 @@ public struct Violation: Codable {
         ruleID = try values.decode(String.self, forKey: .ruleID)
         reason = try values.decode(String.self, forKey: .reason)
         line = try values.decode(Int.self, forKey: .line)
-        character = try values.decode(Int.self, forKey: .character)
+        character = try values.decode(Int?.self, forKey: .character)
         file = try values.decode(String.self, forKey: .file)
         severity = try values.decode(Severity.self, forKey: .severity)
         type = try values.decode(String.self, forKey: .type)
