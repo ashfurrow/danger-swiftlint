@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/ashfurrow/danger-swiftlint.svg?style=svg)](https://circleci.com/gh/ashfurrow/danger-swiftlint)
+
 # Danger Swiftlint
 
 [Danger Swift](https://github.com/danger/danger-swift) plugin for [SwiftLint](https://github.com/realm/SwiftLint/).
