@@ -43,7 +43,7 @@ This is the first command line Swift I've ever written, and it's the first Dange
 A good place to start is writing a failing unit test. Then you can try to fix the bug. First, you'll need to fork the repo and clone your fork locally. Build it and run the unit tests. 
 
 ```sh
-git clone https://github.com/YOUR_USERNAME/danger-swiftlint
+git clone https://github.com/YOUR_USERNAME/danger-swiftlint.git
 cd danger-swiftlint
 swift build
 swift test
