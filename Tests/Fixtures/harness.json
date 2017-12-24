@@ -594,7 +594,7 @@
     },
     "settings": {
       "github": {
-        "accessToken": "eaae2d8b563c4278ec628584408d2a51ccbe86bb",
+        "accessToken": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "additionalHeaders": {}
       },
       "cliArgs": {}

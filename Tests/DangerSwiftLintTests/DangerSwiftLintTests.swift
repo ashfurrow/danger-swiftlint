@@ -61,11 +61,6 @@ class DangerSwiftLintTests: XCTestCase {
         """
     }
 
-    func testThisDoesNotCrash() {
-//        print(ShellExecutor().execute("swiftlint"))
-        print("Working directory: \(ShellExecutor().execute("pwd"))")
-    }
-
     func writeMarkdown(_ m: String) {
         markdownMessage = m
     }

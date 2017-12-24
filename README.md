@@ -1,6 +1,6 @@
 # Danger Swiftlint
 
-[Danger Swift](https://github.com/danger/danger-swift) plugin for [SwiftLint](https://github.com/realm/SwiftLint/). **This is a work in progress**.
+[Danger Swift](https://github.com/danger/danger-swift) plugin for [SwiftLint](https://github.com/realm/SwiftLint/).
 
 (**Note**: If you're looking for the _Ruby_ version of this Danger plugin, it has been moved [here](https://github.com/ashfurrow/danger-ruby-swiftlint).)
 
@@ -29,6 +29,22 @@ let danger = Danger()
 
 SwiftLint.lint()
 ```
+
+# Contributing
+
+If you find a bug, please open an issue! Or a pull request :wink:
+
+# Customizing
+
+There are tonnes of ways this plugin can be customized for individual use cases. After building [the Ruby version](https://github.com/ashfurrow/danger-ruby-swiftlint) of this plugin, I realized that it's really difficult to scale up a tool that works for everyone. So instead, this plugin is a template for you to do whatever you want with!
+
+1. Fork this project.
+1. Change the `import DangerSwiftLint` package URL to point to your fork
+1. After making your changes to the plugin, push them and **push a new tag**.
+
+Because you need to tag a new version, testing your plugin can be tricky. I've built some basic unit tests, so you should be able to use test-driven development for most of your changes.
+
+If you think you've got a real general-purpose feature that most users of this plugin would benefit from, I would be grateful for a pull request.
 
 # License
 
