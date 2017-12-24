@@ -13,9 +13,9 @@
 ```yaml
 dependencies:
   override:
-  - npm install -g danger # This and the next line are just for Danger-Swift.
-  - brew install danger/tap/danger-swift
-  - brew install swiftlint # This is for the Danger Swiftlint plugin.
+  - npm install -g danger # This installs Danger
+  - brew install danger/tap/danger-swift # This installs Danger-Swift
+  - brew install swiftlint # This is for the Danger SwiftLint plugin.
 ```
 
 Then use the following `Dangerfile.swift`.
