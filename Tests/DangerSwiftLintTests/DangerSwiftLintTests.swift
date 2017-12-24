@@ -23,7 +23,7 @@ class DangerSwiftLintTests: XCTestCase {
 
     func testFiltersOnSwiftFiles() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
-        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[1].split(separator: ".").last })
+        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last })
         XCTAssertEqual(filesExtensions, ["swift"])
     }
 
