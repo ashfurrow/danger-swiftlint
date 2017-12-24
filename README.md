@@ -8,7 +8,7 @@
 
 ## Usage
 
-[Install and run](https://github.com/danger/danger-swift#ci-configuration) DangerSwift as normal and install SwiftLint in your CI's config file. Something like:
+[Install and run](https://github.com/danger/danger-swift#ci-configuration) Danger Swift as normal and install SwiftLint in your CI's config file. Something like:
 
 ```yaml
 dependencies:
@@ -23,7 +23,6 @@ Then use the following `Dangerfile.swift`.
 ```swift
 // Dangerfile.swift
 
-import Foundation
 import Danger
 import DangerSwiftLint // package: https://github.com/danger/DangerSwiftLint.git
 
