@@ -24,10 +24,17 @@ internal extension SwiftLint {
         fail: (String) -> Void = fail) -> [Violation] {
         // Gathers modified+created files, invokes SwiftLint on each, and posts collected errors+warnings to Danger.
 
+        let rootDirectory = shellExecutor.execute("pwd")
         let files = danger.git.createdFiles + danger.git.modifiedFiles
         let decoder = JSONDecoder()
         let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
-            let outputJSON = shellExecutor.execute("swiftlint", arguments: "lint", "--quiet", "--path \(file)", "--reporter json")
+            let url = URL(fileURLWithPath: file)
+            let directory = url.deletingLastPathComponent().path
+            let filename = url.lastPathComponent
+            _ = shellExecutor.execute("cd", arguments: directory)
+            defer { _ = shellExecutor.execute("cd", arguments: rootDirectory) }
+            
+            let outputJSON = shellExecutor.execute("swiftlint", arguments: "lint", "--quiet", "--path \(filename)", "--reporter json")
             do {
                 return try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
             } catch let error {
