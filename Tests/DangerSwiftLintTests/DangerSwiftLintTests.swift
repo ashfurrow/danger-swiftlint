@@ -10,7 +10,7 @@ class DangerSwiftLintTests: XCTestCase {
     override func setUp() {
         executor = FakeShellExecutor()
         // This is for me, testing. Uncomment if you're running tests locally.
-        FileManager.default.changeCurrentDirectoryPath("/Users/ash/bin/danger-swiftlint")
+        FileManager.default.changeCurrentDirectoryPath("/Users/lukaszmroz/Projects/OtherProjects/Libraries/danger-swiftlint")
         let dslJSONContents = FileManager.default.contents(atPath: "./Tests/Fixtures/harness.json")!
         danger = try! JSONDecoder().decode(DSL.self, from: dslJSONContents).danger
         markdownMessage = nil
@@ -31,6 +31,18 @@ class DangerSwiftLintTests: XCTestCase {
         swiftlintCommands.forEach { command, arguments in
             XCTAssertTrue(arguments.contains("--config \(configFile)"))
         }
+    }
+
+    func testExecutesSwiftLintWithDirectoryPassed() {
+        let dslJSONContents = FileManager.default.contents(atPath: "./Tests/Fixtures/harness_directories.json")!
+        danger = try! JSONDecoder().decode(DSL.self, from: dslJSONContents).danger
+        let directory = "Tests"
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, directory: directory)
+        
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        XCTAssertTrue(swiftlintCommands.count == 1)
+        XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path Tests/SomeFile.swift"))
     }
 
     func testFiltersOnSwiftFiles() {
