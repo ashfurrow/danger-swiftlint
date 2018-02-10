@@ -21,6 +21,17 @@ class DangerSwiftLintTests: XCTestCase {
         XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
     }
 
+    func testExecutesSwiftLintWithConfigWhenPassed() {
+        let configFile = "/Path/to/config/.swiftlint.yml"
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, configFile: configFile)
+
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        swiftlintCommands.forEach { command, arguments in
+            XCTAssertTrue(arguments.contains("--config \(configFile)"))
+        }
+    }
+
     func testFiltersOnSwiftFiles() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
         let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last })
