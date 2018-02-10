@@ -33,6 +33,17 @@ class DangerSwiftLintTests: XCTestCase {
         }
     }
 
+    func testExecutesSwiftLintWithDirectoryPassed() {
+        let dslJSONContents = FileManager.default.contents(atPath: "./Tests/Fixtures/harness_directories.json")!
+        danger = try! JSONDecoder().decode(DSL.self, from: dslJSONContents).danger
+        let directory = "Tests"
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, directory: directory)
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        XCTAssertTrue(swiftlintCommands.count == 1)
+        XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path Tests/SomeFile.swift"))
+    }
+
     func testFiltersOnSwiftFiles() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
         let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last })
