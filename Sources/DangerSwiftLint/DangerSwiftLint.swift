@@ -11,7 +11,7 @@ public struct SwiftLint {
     public static func lint(configFile: String? = nil) -> [Violation] {
         // First, for debugging purposes, print the working directory.
         print("Working directory: \(shellExecutor.execute("pwd"))")
-        return self.lint(danger: danger, shellExecutor: shellExecutor)
+        return self.lint(danger: danger, shellExecutor: shellExecutor, configFile: configFile)
     }
 }
 
