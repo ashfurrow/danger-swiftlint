@@ -8,10 +8,10 @@ public struct SwiftLint {
     /// This is the main entry point for linting Swift in PRs using Danger-Swift.
     /// Call this function anywhere from within your Dangerfile.swift.
     @discardableResult
-    public static func lint(configFile: String? = nil) -> [Violation] {
+    public static func lint(directory: String? = nil, configFile: String? = nil) -> [Violation] {
         // First, for debugging purposes, print the working directory.
         print("Working directory: \(shellExecutor.execute("pwd"))")
-        return self.lint(danger: danger, shellExecutor: shellExecutor, configFile: configFile)
+        return self.lint(danger: danger, shellExecutor: shellExecutor, directory: directory, configFile: configFile)
     }
 }
 
@@ -20,12 +20,16 @@ internal extension SwiftLint {
     static func lint(
         danger: DangerDSL,
         shellExecutor: ShellExecutor,
+        directory: String? = nil,
         configFile: String? = nil,
         markdown: (String) -> Void = markdown,
         fail: (String) -> Void = fail) -> [Violation] {
         // Gathers modified+created files, invokes SwiftLint on each, and posts collected errors+warnings to Danger.
 
-        let files = danger.git.createdFiles + danger.git.modifiedFiles
+        var files = danger.git.createdFiles + danger.git.modifiedFiles
+        if let directory = directory {
+            files = files.filter { $0.hasPrefix(directory) }
+        }
         let decoder = JSONDecoder()
         let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
             var arguments = ["lint", "--quiet", "--path \(file)", "--reporter json"]
