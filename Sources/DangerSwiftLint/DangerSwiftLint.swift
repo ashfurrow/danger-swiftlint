@@ -8,7 +8,7 @@ public struct SwiftLint {
     /// This is the main entry point for linting Swift in PRs using Danger-Swift.
     /// Call this function anywhere from within your Dangerfile.swift.
     @discardableResult
-    public static func lint() -> [Violation] {
+    public static func lint(configFile: String? = nil) -> [Violation] {
         // First, for debugging purposes, print the working directory.
         print("Working directory: \(shellExecutor.execute("pwd"))")
         return self.lint(danger: danger, shellExecutor: shellExecutor)
@@ -20,6 +20,7 @@ internal extension SwiftLint {
     static func lint(
         danger: DangerDSL,
         shellExecutor: ShellExecutor,
+        configFile: String? = nil,
         markdown: (String) -> Void = markdown,
         fail: (String) -> Void = fail) -> [Violation] {
         // Gathers modified+created files, invokes SwiftLint on each, and posts collected errors+warnings to Danger.
@@ -27,7 +28,11 @@ internal extension SwiftLint {
         let files = danger.git.createdFiles + danger.git.modifiedFiles
         let decoder = JSONDecoder()
         let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
-            let outputJSON = shellExecutor.execute("swiftlint", arguments: "lint", "--quiet", "--path \(file)", "--reporter json")
+            var arguments = ["lint", "--quiet", "--path \(file)", "--reporter json"]
+            if let configFile = configFile {
+                arguments.append("--config \(configFile)")
+            }
+            let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
             do {
                 return try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
             } catch let error {

@@ -1,7 +1,7 @@
 import Foundation
 
 internal class ShellExecutor {
-    func execute(_ command: String, arguments: String...) -> String {
+    func execute(_ command: String, arguments: [String] = []) -> String {
         let script = "\(command) \(arguments.joined(separator: " "))"
         print("Executing \(script)")
 
