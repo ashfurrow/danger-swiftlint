@@ -143,7 +143,7 @@
         "merge_commit_sha": "067773a36e4a7fa8573614a09399470cd9022165",
         "assignee": null,
         "assignees": [],
-        "requested_reviewers": [],
+        "requested_reviewers": {"users": [], "teams": []},
         "milestone": null,
         "commits_url": "https://api.github.com/repos/Moya/Harvey/pulls/15/commits",
         "review_comments_url": "https://api.github.com/repos/Moya/Harvey/pulls/15/comments",
@@ -585,7 +585,7 @@
         }
       ],
       "reviews": [],
-      "requested_reviewers": [],
+      "requested_reviewers": {"users": [], "teams": []},
       "thisPR": {
         "number": 15,
         "repo": "Harvey",
