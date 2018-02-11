@@ -10,15 +10,37 @@ class DangerSwiftLintTests: XCTestCase {
     override func setUp() {
         executor = FakeShellExecutor()
         // This is for me, testing. Uncomment if you're running tests locally.
-        FileManager.default.changeCurrentDirectoryPath("/Users/ash/bin/danger-swiftlint")
-        let dslJSONContents = FileManager.default.contents(atPath: "./Tests/Fixtures/harness.json")!
-        danger = try! JSONDecoder().decode(DSL.self, from: dslJSONContents).danger
+        // FileManager.default.changeCurrentDirectoryPath("/Users/ash/bin/danger-swiftlint")
+        danger = parseDangerDSL(at: "./Tests/Fixtures/harness.json")
         markdownMessage = nil
     }
 
     func testExecutesTheShell() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
         XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
+    }
+
+    func testExecutesSwiftLintWithConfigWhenPassed() {
+        let configFile = "/Path/to/config/.swiftlint.yml"
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, configFile: configFile)
+
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        XCTAssertTrue(swiftlintCommands.count > 0)
+        swiftlintCommands.forEach { command, arguments in
+            XCTAssertTrue(arguments.contains("--config \(configFile)"))
+        }
+    }
+
+    func testExecutesSwiftLintWithDirectoryPassed() {
+        let directory = "Tests"
+        danger = parseDangerDSL(at: "./Tests/Fixtures/harness_directories.json")
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, directory: directory)
+        
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        XCTAssertTrue(swiftlintCommands.count == 1)
+        XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path Tests/SomeFile.swift"))
     }
 
     func testFiltersOnSwiftFiles() {
@@ -65,8 +87,25 @@ class DangerSwiftLintTests: XCTestCase {
         markdownMessage = m
     }
 
+    func parseDangerDSL(at path: String) -> DangerDSL {
+        let dslJSONContents = FileManager.default.contents(atPath: path)!
+        let decoder = JSONDecoder()
+        if #available(OSX 10.12, *) {
+            decoder.dateDecodingStrategy = .iso8601
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        }
+        return try! decoder.decode(DSL.self, from: dslJSONContents).danger
+    }
+
     static var allTests = [
         ("testExecutesTheShell", testExecutesTheShell),
+        ("testExecutesSwiftLintWithConfigWhenPassed", testExecutesSwiftLintWithConfigWhenPassed),
+        ("testExecutesSwiftLintWithDirectoryPassed", testExecutesSwiftLintWithDirectoryPassed),
         ("testFiltersOnSwiftFiles", testFiltersOnSwiftFiles),
         ("testPrintsNoMarkdownIfNoViolations", testPrintsNoMarkdownIfNoViolations),
         ("testViolations", testViolations),

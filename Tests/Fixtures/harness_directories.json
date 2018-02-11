@@ -2,8 +2,8 @@
   "danger": {
     "git": {
       "modified_files": [
-        "SomeFile.swift",
-        "SomeOtherFile.swift",
+        "Tests/SomeFile.swift",
+        "Harvey/SomeOtherFile.swift",
         "circle.yml"
       ],
       "created_files": [],
