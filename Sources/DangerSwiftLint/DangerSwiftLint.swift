@@ -32,9 +32,9 @@ internal extension SwiftLint {
         }
         let decoder = JSONDecoder()
         let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
-            var arguments = ["lint", "--quiet", "--path \(file)", "--reporter json"]
+            var arguments = ["lint", "--quiet", "--path \"\(file)\"", "--reporter json"]
             if let configFile = configFile {
-                arguments.append("--config \(configFile)")
+                arguments.append("--config \"\(configFile)\"")
             }
             let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
             do {

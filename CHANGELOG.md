@@ -1,6 +1,6 @@
 # Next
 
-Nothing yet!
+- Fixed bug where source and config file paths that contain spaces would trigger erronuous failure messages.
 
 # 0.2.0
 

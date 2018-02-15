@@ -4,6 +4,7 @@
       "modified_files": [
         "Tests/SomeFile.swift",
         "Harvey/SomeOtherFile.swift",
+        "Test Dir/SomeThirdFile.swift",
         "circle.yml"
       ],
       "created_files": [],
