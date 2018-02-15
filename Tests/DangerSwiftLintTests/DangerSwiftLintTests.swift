@@ -28,7 +28,7 @@ class DangerSwiftLintTests: XCTestCase {
         let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
         XCTAssertTrue(swiftlintCommands.count > 0)
         swiftlintCommands.forEach { command, arguments in
-            XCTAssertTrue(arguments.contains("--config \(configFile)"))
+            XCTAssertTrue(arguments.contains("--config \"\(configFile)\""))
         }
     }
 
@@ -40,12 +40,14 @@ class DangerSwiftLintTests: XCTestCase {
         
         let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
         XCTAssertTrue(swiftlintCommands.count == 1)
-        XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path Tests/SomeFile.swift"))
+        XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path \"Tests/SomeFile.swift\""))
     }
 
     func testFiltersOnSwiftFiles() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
-        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last })
+
+        let quoteCharacterSet = CharacterSet(charactersIn: "\"")
+        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last?.trimmingCharacters(in: quoteCharacterSet) })
         XCTAssertEqual(filesExtensions, ["swift"])
     }
 
@@ -65,6 +67,22 @@ class DangerSwiftLintTests: XCTestCase {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor, markdown: writeMarkdown)
         XCTAssertNotNil(markdownMessage)
         XCTAssertTrue(markdownMessage!.contains("SwiftLint found issues"))
+    }
+
+    func testQuotesPathArguments() {
+        danger = parseDangerDSL(at: "./Tests/Fixtures/harness_directories.json")
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
+
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+
+        XCTAssertTrue(swiftlintCommands.count > 0)
+
+        let spacedDirSwiftlintCommands = swiftlintCommands.filter { (_, arguments) in
+            arguments.contains("--path \"Test Dir/SomeThirdFile.swift\"")
+        }
+
+        XCTAssert(spacedDirSwiftlintCommands.count == 1)
     }
 
     func mockViolationJSON() {
@@ -109,6 +127,7 @@ class DangerSwiftLintTests: XCTestCase {
         ("testFiltersOnSwiftFiles", testFiltersOnSwiftFiles),
         ("testPrintsNoMarkdownIfNoViolations", testPrintsNoMarkdownIfNoViolations),
         ("testViolations", testViolations),
-        ("testMarkdownReporting", testMarkdownReporting)
+        ("testMarkdownReporting", testMarkdownReporting),
+        ("testQuotesPathArguments", testQuotesPathArguments)
     ]
 }
