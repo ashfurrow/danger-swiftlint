@@ -24,7 +24,7 @@ Then use the following `Dangerfile.swift`.
 // Dangerfile.swift
 
 import Danger
-import DangerSwiftLint // package: https://github.com/danger/DangerSwiftLint.git
+import DangerSwiftLint // package: https://github.com/ashfurrow/DangerSwiftLint.git
 
 SwiftLint.lint()
 ```
