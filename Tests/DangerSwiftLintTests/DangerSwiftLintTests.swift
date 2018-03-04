@@ -20,6 +20,18 @@ class DangerSwiftLintTests: XCTestCase {
         XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
     }
 
+    func testExecuteSwiftLintInInlineMode() {
+        mockViolationJSON()
+        var warns = [(String, String, Int)]()
+        let warnAction: (String, String, Int) -> Void = { warns.append(($0, $1, $2)) }
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, inline: true, warnInlineAction: warnAction)
+
+        XCTAssertTrue(warns.first?.0 == "Opening braces should be preceded by a single space and on the same line as the declaration.")
+        XCTAssertTrue(warns.first?.1 == "/Users/ash/bin/Harvey/Sources/Harvey/Harvey.swift")
+        XCTAssertTrue(warns.first?.2 == 8)
+    }
+
     func testExecutesSwiftLintWithConfigWhenPassed() {
         let configFile = "/Path/to/config/.swiftlint.yml"
 
@@ -58,13 +70,13 @@ class DangerSwiftLintTests: XCTestCase {
 
     func testViolations() {
         mockViolationJSON()
-        let violations = SwiftLint.lint(danger: danger, shellExecutor: executor, markdown: writeMarkdown)
+        let violations = SwiftLint.lint(danger: danger, shellExecutor: executor, markdownAction: writeMarkdown)
         XCTAssertEqual(violations.count, 2) // Two files, one (identical oops) violation returned for each.
     }
 
     func testMarkdownReporting() {
         mockViolationJSON()
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, markdown: writeMarkdown)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, markdownAction: writeMarkdown)
         XCTAssertNotNil(markdownMessage)
         XCTAssertTrue(markdownMessage!.contains("SwiftLint found issues"))
     }
