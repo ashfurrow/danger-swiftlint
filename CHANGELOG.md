@@ -1,6 +1,6 @@
 ## Next
 
-- Nothing yet!
+- Added `inline` option to `SwiftLint.lint()`. This will trigger an inline comment instead of gathering all violations in a big main comment.
 
 ## 0.2.1
 
