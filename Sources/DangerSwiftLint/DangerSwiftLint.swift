@@ -41,7 +41,16 @@ internal extension SwiftLint {
             }
             let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
             do {
-                return try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
+                var violations = try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
+                // Workaround for a bug that SwiftLint returns absolute path
+                violations = violations.map { violation in
+                    var newViolation = violation
+                    newViolation.update(file: file)
+
+                    return newViolation
+                }
+
+                return violations
             } catch let error {
                 failAction("Error deserializing SwiftLint JSON response (\(outputJSON)): \(error)")
                 return []
