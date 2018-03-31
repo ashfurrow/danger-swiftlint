@@ -28,7 +28,7 @@ class DangerSwiftLintTests: XCTestCase {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor, inline: true, warnInlineAction: warnAction)
 
         XCTAssertTrue(warns.first?.0 == "Opening braces should be preceded by a single space and on the same line as the declaration.")
-        XCTAssertTrue(warns.first?.1 == "/Users/ash/bin/Harvey/Sources/Harvey/Harvey.swift")
+        XCTAssertTrue(warns.first?.1 == "SomeFile.swift")
         XCTAssertTrue(warns.first?.2 == 8)
     }
 
@@ -104,7 +104,7 @@ class DangerSwiftLintTests: XCTestCase {
                 "rule_id" : "opening_brace",
                 "reason" : "Opening braces should be preceded by a single space and on the same line as the declaration.",
                 "character" : 39,
-                "file" : "/Users/ash/bin/Harvey/Sources/Harvey/Harvey.swift",
+                "file" : "/Users/ash/bin/SomeFile.swift",
                 "severity" : "Warning",
                 "type" : "Opening Brace Spacing",
                 "line" : 8
