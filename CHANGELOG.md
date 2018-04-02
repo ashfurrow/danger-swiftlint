@@ -1,6 +1,6 @@
 ## Next
 
-- Nothing yet!
+- Added `inline` option to `SwiftLint.lint()`. This will trigger an inline comment instead of gathering all violations in a big main comment. For more details about inline mode, see [this docs in Danger JS](https://github.com/danger/danger-js/blob/master/CHANGELOG.md#340).
 
 ## 0.2.1
 

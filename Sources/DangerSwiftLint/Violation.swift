@@ -8,9 +8,10 @@ public struct Violation: Codable {
     let reason: String
     let line: Int
     let character: Int?
-    let file: String
     let severity: Severity
     let type: String
+    
+    private(set) var file: String
 
     enum CodingKeys: String, CodingKey {
         case ruleID = "rule_id"
@@ -31,6 +32,10 @@ public struct Violation: Codable {
     public func toMarkdown() -> String {
         let formattedFile = file.split(separator: "/").last! + ":\(line)"
         return "\(severity.rawValue) | \(formattedFile) | \(reason) |"
+    }
+
+    mutating func update(file: String) {
+        self.file = file
     }
 }
 

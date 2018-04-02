@@ -31,6 +31,14 @@ SwiftLint.lint()
 
 That will lint the created and modified files
 
+#### Inline mode
+
+If you want the lint result shows in diff instead of comment, you can use inline_mode option. Violations that out of the diff will show in danger's fail or warn section.
+
+```swift
+SwiftLint.lint(inline: true)
+```
+
 # Contributing
 
 If you find a bug, please [open an issue](https://github.com/ashfurrow/danger-swiftlint/issues/new)! Or a pull request :wink: 
