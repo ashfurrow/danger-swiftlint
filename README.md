@@ -39,6 +39,17 @@ If you want the lint result shows in diff instead of comment, you can use inline
 SwiftLint.lint(inline: true)
 ```
 
+#### Config & Directory
+
+You can also specify a path to the config file using `configFile` parameter and a path to the directory you want to lint using `directory` parameter. This is helpful when you want to have different config files for different directories. E.g. Harvey wants to lint test files differently than the source files, thus they have the following  setup:
+
+```swift
+SwiftLint.lint(directory: "Sources", configFile: ".swiftlint.yml")
+SwiftLint.lint(directory: "Tests", configFile: "Tests/HarveyTests/.swiftlint.yml")
+```
+
+It's not possible to use [nested configurations](https://github.com/realm/SwiftLint#nested-configurations), because Danger SwiftLint lints each file on it's own, and by doing that the nested configuration is disabled. If you want to learn more details about this, read the whole issue [here](https://github.com/ashfurrow/danger-swiftlint/issues/4).
+
 # Contributing
 
 If you find a bug, please [open an issue](https://github.com/ashfurrow/danger-swiftlint/issues/new)! Or a pull request :wink: 
