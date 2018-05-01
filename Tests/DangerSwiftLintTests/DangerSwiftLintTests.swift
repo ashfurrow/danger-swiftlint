@@ -9,8 +9,8 @@ class DangerSwiftLintTests: XCTestCase {
 
     override func setUp() {
         executor = FakeShellExecutor()
-        // This is for me, testing. Uncomment if you're running tests locally.
-        // FileManager.default.changeCurrentDirectoryPath("/Users/ash/bin/danger-swiftlint")
+        let localPath = URL(string: #file)!.deletingLastPathComponent(2).absoluteString
+        FileManager.default.changeCurrentDirectoryPath(localPath)
         danger = parseDangerDSL(at: "./Tests/Fixtures/harness.json")
         markdownMessage = nil
     }
