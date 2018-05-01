@@ -9,8 +9,8 @@ class DangerSwiftLintTests: XCTestCase {
 
     override func setUp() {
         executor = FakeShellExecutor()
-        // This is for me, testing. Uncomment if you're running tests locally.
-        // FileManager.default.changeCurrentDirectoryPath("/Users/ash/bin/danger-swiftlint")
+        let localPath = URL(string: #file)!.deletingLastPathComponent(2).absoluteString
+        FileManager.default.changeCurrentDirectoryPath(localPath)
         danger = parseDangerDSL(at: "./Tests/Fixtures/harness.json")
         markdownMessage = nil
     }
@@ -59,7 +59,7 @@ class DangerSwiftLintTests: XCTestCase {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
 
         let quoteCharacterSet = CharacterSet(charactersIn: "\"")
-        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last?.trimmingCharacters(in: quoteCharacterSet) })
+        let filesExtensions = Set(executor.invocations.dropFirst().compactMap { $0.arguments[2].split(separator: ".").last?.trimmingCharacters(in: quoteCharacterSet) })
         XCTAssertEqual(filesExtensions, ["swift"])
     }
 
