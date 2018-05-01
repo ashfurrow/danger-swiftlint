@@ -59,7 +59,7 @@ class DangerSwiftLintTests: XCTestCase {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
 
         let quoteCharacterSet = CharacterSet(charactersIn: "\"")
-        let filesExtensions = Set(executor.invocations.dropFirst().flatMap { $0.arguments[2].split(separator: ".").last?.trimmingCharacters(in: quoteCharacterSet) })
+        let filesExtensions = Set(executor.invocations.dropFirst().compactMap { $0.arguments[2].split(separator: ".").last?.trimmingCharacters(in: quoteCharacterSet) })
         XCTAssertEqual(filesExtensions, ["swift"])
     }
 
