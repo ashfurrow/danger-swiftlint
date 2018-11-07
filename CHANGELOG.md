@@ -1,5 +1,9 @@
 ## Next
 
+- Nothing yet!
+
+## 0.4.0
+
 - Addded `lintAllFiles` option to `SwiftLint.lint()`. This will lint all existing files (instead of just the added/modified ones). However, nested configurations works when this option is enabled.
 
 ## 0.3.0
