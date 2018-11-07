@@ -1,0 +1,1 @@
+Deploying is weird because you're not _really_ deploying. Whatever is on master is what gets downloaded as the plugin (via [Marathon](https://github.com/JohnSundell/Marathon)). So just tag a release to make it official.
