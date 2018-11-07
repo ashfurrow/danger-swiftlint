@@ -48,7 +48,17 @@ SwiftLint.lint(directory: "Sources", configFile: ".swiftlint.yml")
 SwiftLint.lint(directory: "Tests", configFile: "Tests/HarveyTests/.swiftlint.yml")
 ```
 
-It's not possible to use [nested configurations](https://github.com/realm/SwiftLint#nested-configurations), because Danger SwiftLint lints each file on it's own, and by doing that the nested configuration is disabled. If you want to learn more details about this, read the whole issue [here](https://github.com/ashfurrow/danger-swiftlint/issues/4).
+### Lint all files
+
+By default, only files that were added or modified are linted.
+
+It's not possible to use [nested configurations](https://github.com/realm/SwiftLint#nested-configurations) in that case, because Danger SwiftLint lints each file on it's own, and by doing that the nested configuration is disabled. If you want to learn more details about this, read the whole issue [here](https://github.com/ashfurrow/danger-swiftlint/issues/4).
+
+However, you can use the `lintAllFiles` option to lint all the files. In that case, Danger SwiftLint doesn't lint files individually, which makes nested configuration to work. It'd be the same as you were running `swiftlint` on the root folder:
+
+```swift
+SwiftLint.lint(lintAllFiles: true)
+```
 
 # Contributing
 

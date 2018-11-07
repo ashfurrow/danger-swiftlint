@@ -8,10 +8,10 @@ public struct SwiftLint {
     /// This is the main entry point for linting Swift in PRs using Danger-Swift.
     /// Call this function anywhere from within your Dangerfile.swift.
     @discardableResult
-    public static func lint(inline: Bool = false, directory: String? = nil, configFile: String? = nil) -> [Violation] {
+    public static func lint(inline: Bool = false, directory: String? = nil, configFile: String? = nil, lintAllFiles: Bool = false) -> [Violation] {
         // First, for debugging purposes, print the working directory.
         print("Working directory: \(shellExecutor.execute("pwd"))")
-        return self.lint(danger: danger, shellExecutor: shellExecutor, inline: inline, directory: directory, configFile: configFile)
+        return self.lint(danger: danger, shellExecutor: shellExecutor, inline: inline, directory: directory, configFile: configFile, lintAllFiles: lintAllFiles)
     }
 }
 
@@ -23,38 +23,47 @@ internal extension SwiftLint {
         inline: Bool = false,
         directory: String? = nil,
         configFile: String? = nil,
+        lintAllFiles: Bool = false,
+        currentPathProvider: CurrentPathProvider = DefaultCurrentPathProvider(),
         markdownAction: (String) -> Void = markdown,
         failAction: (String) -> Void = fail,
         failInlineAction: (String, String, Int) -> Void = fail,
         warnInlineAction: (String, String, Int) -> Void = warn) -> [Violation] {
         // Gathers modified+created files, invokes SwiftLint on each, and posts collected errors+warnings to Danger.
 
-        var files = danger.git.createdFiles + danger.git.modifiedFiles
-        if let directory = directory {
-            files = files.filter { $0.hasPrefix(directory) }
-        }
-        let decoder = JSONDecoder()
-        let violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
-            var arguments = ["lint", "--quiet", "--path \"\(file)\"", "--reporter json"]
+        var violations: [Violation]
+        if lintAllFiles {
+            var arguments = ["lint", "--quiet", "--reporter json"]
+            if let directory = directory {
+                arguments.append("--path \"\(directory)\"")
+            }
             if let configFile = configFile {
                 arguments.append("--config \"\(configFile)\"")
             }
             let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
-            do {
-                var violations = try decoder.decode([Violation].self, from: outputJSON.data(using: String.Encoding.utf8)!)
-                // Workaround for a bug that SwiftLint returns absolute path
-                violations = violations.map { violation in
-                    var newViolation = violation
-                    newViolation.update(file: file)
-
-                    return newViolation
-                }
-
-                return violations
-            } catch let error {
-                failAction("Error deserializing SwiftLint JSON response (\(outputJSON)): \(error)")
-                return []
+            violations = makeViolations(from: outputJSON, failAction: failAction)
+        } else {
+            var files = danger.git.createdFiles + danger.git.modifiedFiles
+            if let directory = directory {
+                files = files.filter { $0.hasPrefix(directory) }
             }
+
+            violations = files.filter { $0.hasSuffix(".swift") }.flatMap { file -> [Violation] in
+                var arguments = ["lint", "--quiet", "--path \"\(file)\"", "--reporter json"]
+                if let configFile = configFile {
+                    arguments.append("--config \"\(configFile)\"")
+                }
+                let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
+                return makeViolations(from: outputJSON, failAction: failAction)
+            }
+        }
+
+        let currentPath = currentPathProvider.currentPath
+        violations = violations.map { violation in
+            let updatedPath = violation.file.deletingPrefix(currentPath).deletingPrefix("/")
+            var violation = violation
+            violation.update(file: updatedPath)
+            return violation
         }
 
         if !violations.isEmpty {
@@ -80,5 +89,23 @@ internal extension SwiftLint {
         }
 
         return violations
+    }
+
+    private static func makeViolations(from response: String, failAction: (String) -> Void) -> [Violation] {
+        let decoder = JSONDecoder()
+        do {
+            let violations = try decoder.decode([Violation].self, from: response.data(using: .utf8)!)
+            return  violations
+        } catch {
+            failAction("Error deserializing SwiftLint JSON response (\(response)): \(error)")
+            return []
+        }
+    }
+}
+
+private extension String {
+    func deletingPrefix(_ prefix: String) -> String {
+        guard hasPrefix(prefix) else { return self }
+        return String(dropFirst(prefix.count))
     }
 }

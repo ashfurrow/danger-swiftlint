@@ -4,11 +4,15 @@ import Danger
 
 class DangerSwiftLintTests: XCTestCase {
     var executor: FakeShellExecutor!
+    var fakePathProvider: FakeCurrentPathProvider!
     var danger: DangerDSL!
     var markdownMessage: String?
 
     override func setUp() {
         executor = FakeShellExecutor()
+        fakePathProvider = FakeCurrentPathProvider()
+        fakePathProvider.currentPath = "/Users/ash/bin"
+
         let localPath = URL(string: #file)!.deletingLastPathComponent(2).absoluteString
         FileManager.default.changeCurrentDirectoryPath(localPath)
         danger = parseDangerDSL(at: "./Tests/Fixtures/harness.json")
@@ -16,7 +20,7 @@ class DangerSwiftLintTests: XCTestCase {
     }
 
     func testExecutesTheShell() {
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider)
         XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
     }
 
@@ -25,17 +29,17 @@ class DangerSwiftLintTests: XCTestCase {
         var warns = [(String, String, Int)]()
         let warnAction: (String, String, Int) -> Void = { warns.append(($0, $1, $2)) }
 
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, inline: true, warnInlineAction: warnAction)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, inline: true, currentPathProvider: fakePathProvider, warnInlineAction: warnAction)
 
-        XCTAssertTrue(warns.first?.0 == "Opening braces should be preceded by a single space and on the same line as the declaration.")
-        XCTAssertTrue(warns.first?.1 == "SomeFile.swift")
-        XCTAssertTrue(warns.first?.2 == 8)
+        XCTAssertEqual(warns.first?.0, "Opening braces should be preceded by a single space and on the same line as the declaration.")
+        XCTAssertEqual(warns.first?.1, "SomeFile.swift")
+        XCTAssertEqual(warns.first?.2, 8)
     }
 
     func testExecutesSwiftLintWithConfigWhenPassed() {
         let configFile = "/Path/to/config/.swiftlint.yml"
 
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, configFile: configFile)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, configFile: configFile, currentPathProvider: fakePathProvider)
 
         let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
         XCTAssertTrue(swiftlintCommands.count > 0)
@@ -48,15 +52,37 @@ class DangerSwiftLintTests: XCTestCase {
         let directory = "Tests"
         danger = parseDangerDSL(at: "./Tests/Fixtures/harness_directories.json")
 
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, directory: directory)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, directory: directory, currentPathProvider: fakePathProvider)
         
         let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
-        XCTAssertTrue(swiftlintCommands.count == 1)
+        XCTAssertEqual(swiftlintCommands.count, 1)
         XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path \"Tests/SomeFile.swift\""))
     }
 
+    func testExecutesSwiftLintWhenLintingAllFiles() {
+        danger = parseDangerDSL(at: "./Tests/Fixtures/harness_directories.json")
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, lintAllFiles: true, currentPathProvider: fakePathProvider)
+        
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        XCTAssertEqual(swiftlintCommands.count, 1)
+        XCTAssertFalse(swiftlintCommands.first!.arguments.contains("--path"))
+    }
+
+    func testExecutesSwiftLintWhenLintingAllFilesWithDirectoryPassed() {
+        let directory = "Tests"
+        danger = parseDangerDSL(at: "./Tests/Fixtures/harness_directories.json")
+
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, directory: directory, lintAllFiles: true, currentPathProvider: fakePathProvider)
+        
+        let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
+        XCTAssertEqual(swiftlintCommands.count, 1)
+        XCTAssertFalse(swiftlintCommands.first!.arguments.contains("--path \"Tests/SomeFile.swift\""))
+        XCTAssertTrue(swiftlintCommands.first!.arguments.contains("--path \"Tests\""))
+    }
+
     func testFiltersOnSwiftFiles() {
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider)
 
         let quoteCharacterSet = CharacterSet(charactersIn: "\"")
         let filesExtensions = Set(executor.invocations.dropFirst().compactMap { $0.arguments[2].split(separator: ".").last?.trimmingCharacters(in: quoteCharacterSet) })
@@ -64,19 +90,19 @@ class DangerSwiftLintTests: XCTestCase {
     }
 
     func testPrintsNoMarkdownIfNoViolations() {
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider)
         XCTAssertNil(markdownMessage)
     }
 
     func testViolations() {
         mockViolationJSON()
-        let violations = SwiftLint.lint(danger: danger, shellExecutor: executor, markdownAction: writeMarkdown)
+        let violations = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider, markdownAction: writeMarkdown)
         XCTAssertEqual(violations.count, 2) // Two files, one (identical oops) violation returned for each.
     }
 
     func testMarkdownReporting() {
         mockViolationJSON()
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, markdownAction: writeMarkdown)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider, markdownAction: writeMarkdown)
         XCTAssertNotNil(markdownMessage)
         XCTAssertTrue(markdownMessage!.contains("SwiftLint found issues"))
     }
@@ -84,7 +110,7 @@ class DangerSwiftLintTests: XCTestCase {
     func testQuotesPathArguments() {
         danger = parseDangerDSL(at: "./Tests/Fixtures/harness_directories.json")
 
-        _ = SwiftLint.lint(danger: danger, shellExecutor: executor)
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider)
 
         let swiftlintCommands = executor.invocations.filter { $0.command == "swiftlint" }
 
@@ -94,7 +120,7 @@ class DangerSwiftLintTests: XCTestCase {
             arguments.contains("--path \"Test Dir/SomeThirdFile.swift\"")
         }
 
-        XCTAssert(spacedDirSwiftlintCommands.count == 1)
+        XCTAssertEqual(spacedDirSwiftlintCommands.count, 1)
     }
 
     func mockViolationJSON() {
@@ -136,6 +162,8 @@ class DangerSwiftLintTests: XCTestCase {
         ("testExecutesTheShell", testExecutesTheShell),
         ("testExecutesSwiftLintWithConfigWhenPassed", testExecutesSwiftLintWithConfigWhenPassed),
         ("testExecutesSwiftLintWithDirectoryPassed", testExecutesSwiftLintWithDirectoryPassed),
+        ("testExecutesSwiftLintWhenLintingAllFiles", testExecutesSwiftLintWhenLintingAllFiles),
+        ("testExecutesSwiftLintWhenLintingAllFilesWithDirectoryPassed", testExecutesSwiftLintWhenLintingAllFilesWithDirectoryPassed),
         ("testFiltersOnSwiftFiles", testFiltersOnSwiftFiles),
         ("testPrintsNoMarkdownIfNoViolations", testPrintsNoMarkdownIfNoViolations),
         ("testViolations", testViolations),
