@@ -8,10 +8,13 @@ public struct SwiftLint {
     /// This is the main entry point for linting Swift in PRs using Danger-Swift.
     /// Call this function anywhere from within your Dangerfile.swift.
     @discardableResult
-    public static func lint(inline: Bool = false, directory: String? = nil, configFile: String? = nil, lintAllFiles: Bool = false) -> [Violation] {
+    public static func lint(inline: Bool = false, directory: String? = nil, 
+                            configFile: String? = nil, lintAllFiles: Bool = false,
+                            swiftlintPath: String = "swiftlint") -> [Violation] {
         // First, for debugging purposes, print the working directory.
         print("Working directory: \(shellExecutor.execute("pwd"))")
-        return self.lint(danger: danger, shellExecutor: shellExecutor, inline: inline, directory: directory, configFile: configFile, lintAllFiles: lintAllFiles)
+        return self.lint(danger: danger, shellExecutor: shellExecutor, inline: inline, directory: directory, 
+                         configFile: configFile, lintAllFiles: lintAllFiles, swiftlintPath: swiftlintPath)
     }
 }
 
@@ -24,6 +27,7 @@ internal extension SwiftLint {
         directory: String? = nil,
         configFile: String? = nil,
         lintAllFiles: Bool = false,
+        swiftlintPath: String = "swiftlint",
         currentPathProvider: CurrentPathProvider = DefaultCurrentPathProvider(),
         markdownAction: (String) -> Void = markdown,
         failAction: (String) -> Void = fail,
@@ -40,7 +44,7 @@ internal extension SwiftLint {
             if let configFile = configFile {
                 arguments.append("--config \"\(configFile)\"")
             }
-            let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
+            let outputJSON = shellExecutor.execute(swiftlintPath, arguments: arguments)
             violations = makeViolations(from: outputJSON, failAction: failAction)
         } else {
             var files = danger.git.createdFiles + danger.git.modifiedFiles
@@ -53,7 +57,7 @@ internal extension SwiftLint {
                 if let configFile = configFile {
                     arguments.append("--config \"\(configFile)\"")
                 }
-                let outputJSON = shellExecutor.execute("swiftlint", arguments: arguments)
+                let outputJSON = shellExecutor.execute(swiftlintPath, arguments: arguments)
                 return makeViolations(from: outputJSON, failAction: failAction)
             }
         }
