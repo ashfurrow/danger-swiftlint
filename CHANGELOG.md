@@ -1,10 +1,10 @@
 ## Next
 
-- Nothing yet!
+- Added `swiftlintPath` option to `SwiftLint.lint()`. This allows providing a custom path if you want to use a specific binary instead of the global one (e.g. when using CocoaPods).
 
 ## 0.4.0
 
-- Addded `lintAllFiles` option to `SwiftLint.lint()`. This will lint all existing files (instead of just the added/modified ones). However, nested configurations works when this option is enabled.
+- Added `lintAllFiles` option to `SwiftLint.lint()`. This will lint all existing files (instead of just the added/modified ones). However, nested configurations works when this option is enabled.
 
 ## 0.3.0
 

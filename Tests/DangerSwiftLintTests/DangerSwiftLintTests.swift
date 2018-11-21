@@ -22,6 +22,13 @@ class DangerSwiftLintTests: XCTestCase {
     func testExecutesTheShell() {
         _ = SwiftLint.lint(danger: danger, shellExecutor: executor, currentPathProvider: fakePathProvider)
         XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
+        XCTAssertEqual(executor.invocations.first?.command, "swiftlint")
+    }
+
+    func testExecutesTheShellWithCustomSwiftLintPath() {
+        _ = SwiftLint.lint(danger: danger, shellExecutor: executor, swiftlintPath: "Pods/SwiftLint/swiftlint", currentPathProvider: fakePathProvider)
+        XCTAssertNotEqual(executor.invocations.dropFirst().count, 0)
+        XCTAssertEqual(executor.invocations.first?.command, "Pods/SwiftLint/swiftlint")
     }
 
     func testExecuteSwiftLintInInlineMode() {

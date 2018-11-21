@@ -60,6 +60,16 @@ However, you can use the `lintAllFiles` option to lint all the files. In that ca
 SwiftLint.lint(lintAllFiles: true)
 ```
 
+### Custom SwiftLint binary path
+
+By default, Danger SwiftLint runs `swiftlint` assuming it's installed globally. However, there're cases where it makes sense to use a different path. One example would be if you've installed SwiftLint using [CocoaPods](https://github.com/CocoaPods/CocoaPods).
+
+To use another binary, you can use the `swiftlintPath` option:
+
+```swift
+SwiftLint.lint(swiftlintPath: "Pods/SwiftLint/swiftlint")
+```
+
 # Contributing
 
 If you find a bug, please [open an issue](https://github.com/ashfurrow/danger-swiftlint/issues/new)! Or a pull request :wink: 
