@@ -1,3 +1,7 @@
+**Deprecation Notice**: This repo has been deprecated, since SwiftLint integration is now a part of [Danger Swift](https://github.com/danger/swift) as a first-class feature. You can read [this issue](https://github.com/ashfurrow/danger-swiftlint/issues/17) for context. This repo will remain available for legacy use, but **new projects should _not_ use this repo**.
+
+---
+
 [![CircleCI](https://circleci.com/gh/ashfurrow/danger-swiftlint.svg?style=svg)](https://circleci.com/gh/ashfurrow/danger-swiftlint)
 
 # Danger SwiftLint
